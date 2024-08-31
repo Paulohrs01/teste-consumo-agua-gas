@@ -4,12 +4,10 @@ import axios from 'axios';
 export const uploadImage = async (req: Request, res: Response) => {
   const { image, customer_code, measure_datetime, measure_type } = req.body;
 
-  // Validar dados
   if (!image || !customer_code || !measure_datetime || !measure_type) {
     return res.status(400).json({ error_code: 'INVALID_DATA', error_description: 'Dados faltando' });
   }
 
-  // Verificar tipo de medida
   const validMeasureTypes = ['WATER', 'GAS'];
   if (!validMeasureTypes.includes(measure_type.toUpperCase())) {
     return res.status(400).json({ error_code: 'INVALID_TYPE', error_description: 'Tipo de medição não permitido' });
@@ -18,7 +16,7 @@ export const uploadImage = async (req: Request, res: Response) => {
   // Verificar duplicidade e integrar com API de LLM (exemplo fictício)
   try {
     // Supondo integração fictícia
-    const response = await axios.post('https://api.example.com/llm', { image, measure_type });
+    const response = await axios.post('http://localhost:3000/api/upload', { image, measure_type });
     const { image_url, measure_uuid, measure_value } = response.data;
 
     // Retorno de sucesso

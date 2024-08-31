@@ -4,9 +4,7 @@ export const listMeasures = async (req: Request, res: Response) => {
   const customer_code = req.params.customer_code;
   const measure_type = req.query.measure_type as string;
 
-  // Simulação de filtragem e retorno
   try {
-    // Filtrar e retornar as medições
     return res.status(200).json({
       customer_code,
       measures: [
